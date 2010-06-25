@@ -23,15 +23,6 @@ Bucket:: SetBucketProperties()
 	std::cin >> mPenetrationDepth ;
 }
 
-
-/*
-void
-Bucket:: SetBucketDimensions( int* temp )
-{
-	mBucketDimensions[0] = *temp ;
-	mBucketDimensions[1] = *(temp+1) ;
-}
-*/
 const float
 Bucket:: GetBucketLength() const
 {
@@ -43,3 +34,12 @@ Bucket:: GetBucketWidth() const
 {
 	return mBucketWidth ;
 }
+
+/*
+void
+Bucket:: SetBucketDimensions( int* temp )
+{
+	mBucketDimensions[0] = *temp ;
+	mBucketDimensions[1] = *(temp+1) ;
+}
+*/

@@ -1,4 +1,5 @@
 #include <conio.h>
+#include <cmath>
 #include <iostream>
 
 #include "MyClass.h"
@@ -6,7 +7,7 @@
 int main()
 {
 	int Continue( 1 ) ;
-	
+	std::cout <<"Checking this:\t" <<std::endl ;
 	do
 	{
 		MyClass* Obj = new MyClass() ;

@@ -17,6 +17,7 @@ class DredgeArea : public Bucket
 		float GetSwingArcLength() const ;
 		
 	private:
+
 		float mDredgeLength, mDredgeWidth ;
 		float mDredgeArea, mTotalDredgeSwingAngle, mSwingArcLength ;
 		float mLateralOverlap, mLongitudinalOverlap ;

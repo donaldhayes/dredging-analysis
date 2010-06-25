@@ -17,10 +17,20 @@ Machine:: SetMachineProperties()
 	std::cout <<"\n\n Enter Dredging Machine Data \n" ;
 	std::cout <<" ------------------------------- \n" ;
 
-	std::cout <<"\t Boom Length:  " ; std::cin >> mBoomLength ;
-	std::cout <<"\t Maximum Dredging Width:  " ; std::cin >> mMaxDredgeWidth ;
-	std::cout <<"\t Minimum Dredge Reach:  " ; std::cin >> mMinDredgeReach ;
-	std::cout <<"\t Maximum Dredge Reach:  " ; std::cin >> mMaxDredgeReach ;
+	std::cout <<"\t Boom Length:  " ;
+	std::cin >> mBoomLength ;
+	std::cout <<"\t Maximum Dredging Width:  " ;
+	std::cin >> mMaxDredgeWidth ;
+	std::cout <<"\t Minimum Dredge Reach:  " ;
+	std::cin >> mMinDredgeReach ;
+	std::cout <<"\t Maximum Dredge Reach:  " ;
+	std::cin >> mMaxDredgeReach ;
+}
+
+const float
+Machine:: GetBoomLength() const
+{
+	return mBoomLength ;
 }
 
 /*
@@ -48,8 +58,3 @@ Machine:: SetHookToSeabedHeight( int& HookToSeabedHeight )
 	mHookToSeabedHeight = HookToSeabedHeight ;
 }
 */
-const float
-Machine:: GetBoomLength() const
-{
-	return mBoomLength ;
-}

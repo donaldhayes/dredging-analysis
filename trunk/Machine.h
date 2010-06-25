@@ -7,14 +7,16 @@ class Machine
 	public:
 		Machine() ;
 		void SetMachineProperties() ;
+		const float GetBoomLength() const;
+		
 		/*void  SetAngularDisplacement( float& AngularDisplacement ) ;
 		float GetAngularDisplacement() const;
 		
-		void VolumeCalculation() ;*/
+		void VolumeCalculation() ;
 
-	//	void SetHookToSeabedHeight( int& ) ;
+		void SetHookToSeabedHeight( int& ) ;*/
 
-		const float GetBoomLength() const;
+
 
 	private:
 		float mBoomLength, mMaxDredgeWidth, mMinDredgeReach, mMaxDredgeReach ;

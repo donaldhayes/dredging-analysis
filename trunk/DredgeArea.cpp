@@ -82,10 +82,13 @@ DredgeArea:: BucketRows()
 	float lBucketWidth( GetBucketWidth() ) ;
 	float lnumBucketRows, lLongitudinalOverlap ;
 
-	lnumBucketRows = (  mDredgeLength / 
+	lnumBucketRows = (  mDredgeWidth / 
 				       ( lBucketWidth - mLongitudinalOverlap ) 
 					 ) + 1 ;
 
 	lLongitudinalOverlap = lBucketWidth - ( mDredgeLength / lnumBucketRows ) + 1 ;
+
+	std::cout << " \n\nNumber of bucket rows:\t" << lnumBucketRows <<std::endl ;
+	std::cout << " Longitudinal bucket overlap to fix bucket exactly:\t" << lLongitudinalOverlap <<std::endl ;
 
 }
