@@ -7,7 +7,8 @@
 int main()
 {
 	int Continue( 1 ) ;
-	std::cout <<"Checking this:\t" <<std::endl ;
+	std::cout <<"Checking this:\t" << std::endl ;
+	std::cout <<" Added this line to check email notification " << std::endl ;
 	do
 	{
 		MyClass* Obj = new MyClass() ;
