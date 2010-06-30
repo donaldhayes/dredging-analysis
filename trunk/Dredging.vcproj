@@ -40,6 +40,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="$(WXWIN)\include;$(WXWIN)\lib\vc_lib\mswd"
+				PreprocessorDefinitions="WIN32;__WXMSW__;_WINDOWS;_DEBUG;__WXDEBUG__"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -57,6 +59,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="wxmsw28d_core.lib wxbase28d.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib wxregexd.lib wxexpatd.lib winmm.lib comctl32.lib rpcrt4.lib wsock32.lib odbc32.lib"
+				AdditionalLibraryDirectories="$(WXWIN)\lib\vc_lib"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -162,23 +166,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Bucket.cpp"
+				RelativePath=".\MyApp.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\DredgeArea.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Machine.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MyClass.cpp"
+				RelativePath=".\MyFrame.cpp"
 				>
 			</File>
 		</Filter>
@@ -188,19 +180,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Bucket.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DredgeArea.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Machine.h"
-				>
-			</File>
-			<File
 				RelativePath=".\MyClass.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MyFrame.h"
 				>
 			</File>
 		</Filter>
