@@ -1,13 +1,50 @@
+#include <iostream>
 #include "MyFrame.h"
 
+
+BEGIN_EVENT_TABLE( MyFrame, wxFrame )
+	EVT_BUTTON( 0, OnSubmit ) 
+	EVT_BUTTON( 1, OnRefresh ) 
+END_EVENT_TABLE()
+
+
 MyFrame:: MyFrame( const wxString& lTitle )
-		: wxFrame(NULL, wxID_ANY, lTitle)
+		: mNotebook( NULL ),
+		  mDataPanelTab( NULL ),
+		  mResultsPanelTab( NULL ),
+		  mButtonPanel( NULL ), 
+		  mSubmitButton( NULL ), 
+		  mRefreshButton( NULL ), 
+
+		  wxFrame( NULL, wxID_ANY, lTitle, wxDefaultPosition, wxSize(500,700), wxDEFAULT_FRAME_STYLE, wxString(_T("Frame")) )
 {
+
+	/*AddPageIndexes() ;
+	AddIndexOneSubpages() ;
+	AddIndexTwoSubpages() ;
+
+	IndexOne_MachinePage() ;
+	IndexOne_BucketPage() ;
+	IndexOne_DredgeAreaPage() ;
+
+	IndexTwo_SwingCharacteristicsPage() ;
+	IndexTwo_LateralBucketPlacementPage() ;
+	IndexTwo_BucketRowsPage() ;*/
+
+	AddButtons() ;
+
 }
 
 void
 MyFrame :: AddPageIndexes()
 {
+
+	mNotebook = new wxNotebook( this, -1, wxDefaultPosition, wxSize(500,500),wxNB_FIXEDWIDTH, _T("Notebook") ) ;
+	mDataPanelTab = new wxPanel( mNotebook, wxID_ANY ) ;
+	mResultsPanelTab = new wxPanel( mNotebook, wxID_ANY ) ;
+	mNotebook->AddPage( mDataPanelTab, _T(" Data "),true, 0 ) ;
+	mNotebook->AddPage( mResultsPanelTab, _T(" Results " ), false, 1 ) ;
+
 }
 
 void
@@ -85,6 +122,18 @@ MyFrame :: IndexTwo_BucketRowsPage()
 {
 }
 
+
+void
+MyFrame :: AddButtons()
+{
+
+		mButtonPanel   = new wxPanel( this, wxID_ANY, wxPoint(0,500), wxSize(500,200), wxTAB_TRAVERSAL, wxString(_T("Panel")) ) ;
+		mSubmitButton  = new wxButton( mButtonPanel, 0, _T(" Submit "), wxPoint(100,600), wxDefaultSize ) ;
+		mRefreshButton = new wxButton( mButtonPanel, 1, _T(" Refresh"), wxPoint(300,600), wxDefaultSize ) ;	
+
+}
+
+
 void
 MyFrame :: Calculate_SwingCharacteristics()
 {
@@ -151,3 +200,14 @@ MyFrame :: Calculate_BucketRows()
 	*/
 }
 
+void
+MyFrame :: OnSubmit( wxCommandEvent& SubmitEvent )
+{
+	std::cout <<" Submit button clicked " << std::endl ;
+}
+
+void
+MyFrame :: OnRefresh( wxCommandEvent& RefreshEvent )
+{
+	std::cout <<" Refresh button clicked" << std::endl ;
+}
