@@ -1,11 +1,6 @@
 #include <iostream>
 #include "MyFrame.h"
-
-
-BEGIN_EVENT_TABLE( MyFrame, wxFrame )
-	EVT_BUTTON( 0, OnSubmit ) 
-	EVT_BUTTON( 1, OnRefresh ) 
-END_EVENT_TABLE()
+#include "FormInputs.h"
 
 MyFrame:: MyFrame( const wxString& lTitle )
 		: mNotebook( NULL ),
@@ -13,7 +8,7 @@ MyFrame:: MyFrame( const wxString& lTitle )
 		  mResultsPanelTab( NULL ),
 		  mButtonPanel( NULL ), 
 		  mSubmitButton( NULL ), 
-		  mRefreshButton( NULL ), 
+		  mRefreshButton( NULL ), xxxx(90),
 
 		  wxFrame( NULL, wxID_ANY, lTitle, wxDefaultPosition, wxSize(500,700), wxDEFAULT_FRAME_STYLE, wxString(_T("Frame")) )
 {
@@ -108,88 +103,5 @@ MyFrame :: BucketData()
 	mBucket_Width						= new wxTextCtrl( mDataPanelTab, wxID_ANY, wxEmptyString, wxPoint(220,403), wxSize(50,23), 0, wxDefaultValidator, _T("Text Box To Enter Bucket Width") ) ;
 	mBucket_PenetrationDepth			= new wxTextCtrl( mDataPanelTab, wxID_ANY, wxEmptyString, wxPoint(400,403), wxSize(50,23), 0, wxDefaultValidator, _T("Text Box To Enter Bucket Penetration Depth") ) ;
 
-}
-
-
-void
-MyFrame :: OnSubmit( wxCommandEvent& SubmitEvent )
-{
-	Calculate_SwingCharacteristics() ;
-	Calculate_LateralBucketPlacements() ;
-	Calculate_BucketRows() ;
-}
-
-
-void
-MyFrame :: OnRefresh( wxCommandEvent& RefreshEvent )
-{
-	
-}
-
-
-void
-MyFrame :: Calculate_SwingCharacteristics()
-{
-	/*
-	mTotalDredgeSwingAngle = 2 * asin( mDredgeLength / (2*GetBoomLength()) );
-	mSwingArcLength = mDredgeLength / mTotalDredgeSwingAngle ;
-
-	std::cout <<" \n The total dredge swing angle:\t " << mTotalDredgeSwingAngle ;
-	std::cout <<" \n Swing Arc Length:\t " << mSwingArcLength <<"\n\n" ;
-	*/
-}
-
-void
-MyFrame :: Calculate_LateralBucketPlacements()
-{
-	/*
-	float lBucketLength( GetBucketLength() ) ;
-	int lnumCenterJustified, lnumSideJustified ;
-	float lCenterJustified, lSideJustified ;
-
-
-	lnumCenterJustified = (	2* (  (mSwingArcLength - lBucketLength)/
-								  (2* (lBucketLength - mLateralOverlap) )
-							   ) + 1 
-						  ) + 1 ;
-
-	lnumSideJustified = (  (mSwingArcLength - mLateralOverlap)/
-						   (lBucketLength - mLateralOverlap)
-					    ) + 1 ;
-
-	lCenterJustified = lBucketLength - ( (mSwingArcLength - lBucketLength)/
-										 (lnumCenterJustified - 1)
-									   ) ;
-
-	lSideJustified = ( (lnumSideJustified*lBucketLength) - (lBucketLength + lnumSideJustified) /
-		               (lnumSideJustified - 2)
-					 ) ;
-
-
-	std::cout <<" Number of Buckets in a swing width given a fixed overlap .... " << std::endl ;
-	std::cout <<" \t\t i)   For center justified bucket placement:  "<< lnumCenterJustified << std::endl ;
-	std::cout <<" \t\t ii)  For side justified ( left or right ) bucket placement:  "<< lnumSideJustified << std::endl ;
-	std::cout <<" \n\t The bucket overlap necessary for the number of bucket placements in a swing width to exactly fit the dredging width ..." <<std::endl ;
-	std::cout <<" \t\t i)   For center justified bucket placement:  "<< lCenterJustified << std::endl ;
-	std::cout <<" \t\t ii)  For side justified ( left or right ) bucket placement:  "<< lSideJustified <<std::endl ;
-	*/
-}
-
-void
-MyFrame :: Calculate_BucketRows()
-{
-	/*
-	float lBucketWidth( GetBucketWidth() ) ;
-	float lnumBucketRows, lLongitudinalOverlap ;
-
-	lnumBucketRows = (  mDredgeWidth / 
-				       ( lBucketWidth - mLongitudinalOverlap ) 
-					 ) + 1 ;
-
-	lLongitudinalOverlap = lBucketWidth - ( mDredgeLength / lnumBucketRows ) + 1 ;
-
-	std::cout << " \n\nNumber of bucket rows:\t" << lnumBucketRows <<std::endl ;
-	std::cout << " Longitudinal bucket overlap to fix bucket exactly:\t" << lLongitudinalOverlap <<std::endl ;
-	*/
 }
 

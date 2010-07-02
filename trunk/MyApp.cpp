@@ -1,5 +1,5 @@
 #include "MyApp.h"
-#include "MyFrame.h"
+#include "FormInputs.h"
 
 bool
 MyApp :: OnInit()
@@ -7,7 +7,7 @@ MyApp :: OnInit()
 	if( !wxApp::OnInit() )
 		return false ;
 
-	MyFrame* frame = new MyFrame( _T( "Dredging Analysis") ) ;
+	FormInputs* frame = new FormInputs() ;
 
 	frame->Show( true ) ;
 

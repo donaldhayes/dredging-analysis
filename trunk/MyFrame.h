@@ -18,14 +18,7 @@ class MyFrame : public wxFrame
 		void BucketData() ;
 		void DredgeAreaData() ;
 
-		void Calculate_SwingCharacteristics() ;
-		void Calculate_LateralBucketPlacements() ;
-		void Calculate_BucketRows() ;
-
-		void OnSubmit( wxCommandEvent& ) ;
-		void OnRefresh( wxCommandEvent& ) ;
-
-	private:
+	protected:
 
 		wxPanel *mButtonPanel, *mNotebookPanel ;
 		wxPanel *mDataPanelTab, *mResultsPanelTab ;
@@ -43,7 +36,7 @@ class MyFrame : public wxFrame
 		wxTextCtrl *mBucket_Width, *mBucket_Length, *mBucket_PenetrationDepth ;
 		wxTextCtrl *mDredgeArea_Width, *mDredgeArea_Length, *mDredgeArea_LateralOverlap, *mDredgeArea_LongitudinalOverlap ;
 
-	DECLARE_EVENT_TABLE()
+		int xxxx ;
 
 };
 
