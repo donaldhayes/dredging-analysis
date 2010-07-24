@@ -8,8 +8,8 @@ MyFrame:: MyFrame( const wxString& lTitle )
 		  mResultsPanelTab( NULL ),
 		  mButtonPanel( NULL ), 
 		  mSubmitButton( NULL ), 
-		  mRefreshButton( NULL ), xxxx(90),
-
+		  mRefreshButton( NULL ),
+		  xxxx(90),
 		  wxFrame( NULL, wxID_ANY, lTitle, wxDefaultPosition, wxSize(500,700), wxDEFAULT_FRAME_STYLE, wxString(_T("Frame")) )
 {
 
@@ -17,29 +17,43 @@ MyFrame:: MyFrame( const wxString& lTitle )
 	AddButtons() ;
 
 	AddDataPageContent() ;
+	AddMediaPlayer();
 
 }
 
-void
-MyFrame :: AddPageIndexes()
+void MyFrame :: AddPageIndexes()
 {
 
 	mNotebookPanel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( 500,500 ), wxDEFAULT, _T(" Notebook Panel") );
 	mNotebook = new wxNotebook( mNotebookPanel, -1, wxDefaultPosition, wxSize(500,500),wxNB_FIXEDWIDTH, _T("Notebook") ) ;
 	mDataPanelTab = new wxPanel( mNotebook, wxID_ANY ) ;
 	mResultsPanelTab = new wxPanel( mNotebook, wxID_ANY ) ;
+	mMediaPlayerPanel = new wxPanel( mNotebook,wxID_ANY);
 	mNotebook->AddPage( mDataPanelTab, _T(" Data "),true, 1 ) ;
 	mNotebook->AddPage( mResultsPanelTab, _T(" Results " ), false, 2 ) ;
-	
+	mNotebook->AddPage(mMediaPlayerPanel,_T(" MediaPlayer "), false, 3);
+}
+void MyFrame::AddMediaPlayer()
+{
+	mMediaPlayer = new wxMediaCtrl();
+	wxFlexGridSizer* sizer = new wxFlexGridSizer(2, 1, 0, 0);
+
+	mMediaPlayer->Create(mMediaPlayerPanel,wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0,wxMEDIABACKEND_WMP10);
+	mMediaPlayerPanel->SetSizer(sizer);
+    mMediaPlayerPanel->SetAutoLayout(true);
+    sizer->AddGrowableRow(0);
+    sizer->AddGrowableCol(0);
+	sizer->Add(mMediaPlayer, 0, wxALIGN_CENTER_HORIZONTAL|wxALL|wxEXPAND, 5);
 }
 
 void
 MyFrame :: AddButtons()
 {
 
-	mButtonPanel   = new wxPanel( this, wxID_ANY, wxPoint(0,500), wxSize(500,200), wxTAB_TRAVERSAL, wxString(_T("Panel")) ) ;
-	mSubmitButton  = new wxButton( mButtonPanel, 0, _T(" Submit "), wxPoint(100,100), wxDefaultSize ) ;
-	mRefreshButton = new wxButton( mButtonPanel, 1, _T(" Refresh"), wxPoint(300,100), wxDefaultSize ) ;	
+	mButtonPanel       = new wxPanel( this, wxID_ANY, wxPoint(0,500), wxSize(500,200), wxTAB_TRAVERSAL, wxString(_T("Panel")) ) ;
+	mSubmitButton      = new wxButton( mButtonPanel, 0, _T(" Submit "), wxPoint(100,100), wxDefaultSize ) ;
+	mRefreshButton     = new wxButton( mButtonPanel, 1, _T(" Refresh"), wxPoint(300,100), wxDefaultSize ) ;	
+	mMediaPlayerButton = new wxButton(mButtonPanel,2,wxT("File"), wxPoint(200,100),wxDefaultSize);
 
 }
 

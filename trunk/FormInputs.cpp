@@ -17,7 +17,39 @@ FormInputs	::	FormInputs()
 				MyFrame(_T( "Dredging Analysis") )
 
 {
+	this->Connect(2,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
+	this->Connect(wxID_ANY, wxEVT_MEDIA_LOADED,wxMediaEventHandler(FormInputs::OnMediaLoad),(wxObject*)0);
+	
 }
+void FormInputs :: GetFileToPlay(wxCommandEvent& WXUNUSED(event))
+{
+	mNotebook -> ChangeSelection(2) ;
+	wxFileDialog fd = new wxFileDialog(mMediaPlayerPanel,_("<-----Select From List----->"),_(""),_(""),_("*.*"),wxOPEN,wxDefaultPosition,wxDefaultSize);
+	if(fd.ShowModal() == wxID_OK)
+	{
+		OnGetPath(fd.GetPath());
+	}
+
+}
+void FormInputs ::OnGetPath(const wxString& path)
+{
+	bool lLoadCheck = mMediaPlayer->Load(path);
+}
+
+
+void FormInputs::OnMediaLoad(wxMediaEvent& WXUNUSED(event))
+{
+	bool lPlayCheck = mMediaPlayer->Play();
+	if(lPlayCheck)
+	{
+		mMediaPlayer->ShowPlayerControls(wxMEDIACTRLPLAYERCONTROLS_DEFAULT);
+	}
+	else
+	{
+		wxLogMessage(wxT("Unable To Play the File"));
+	}
+}
+
 
 void
 FormInputs :: GetDredgeAreaData()
