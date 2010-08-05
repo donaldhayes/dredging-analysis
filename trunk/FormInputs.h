@@ -16,6 +16,7 @@ class FormInputs : public MyFrame
 		void GetFileToPlay(wxCommandEvent& event);
 		void OnGetPath(const wxString& path);
 		void OnMediaLoad(wxMediaEvent& event);
+		void OptimizeBucketPlacement(wxCommandEvent& event);
 
 		float ConvertWXStringToFloat( wxString ) ;
 		wxString ConvertFloatToWXString( float ) ;

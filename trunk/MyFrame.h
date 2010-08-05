@@ -8,6 +8,8 @@
 #include <wx/filedlg.h>
 #include <wx/log.h>
 #include <wx/sizer.h>
+#include <wx/dialog.h>
+#include <wx/numdlg.h>
 
 class MyFrame : public wxFrame
 {
@@ -31,7 +33,7 @@ class MyFrame : public wxFrame
 		wxPanel *mFirstChildMachinePanel ;
 		wxPanel *mMediaPlayerPanel;
 		wxNotebook *mNotebook, *mFirstChildNotebook;
-		wxButton *mSubmitButton, *mRefreshButton, *mMediaPlayerButton;
+		wxButton *mSubmitButton, *mRefreshButton, *mMediaPlayerButton,*mOptimizeButton;
 
 		wxStaticBox *mMachineData, *mBucketData, *mDredgeAreaData ;
 

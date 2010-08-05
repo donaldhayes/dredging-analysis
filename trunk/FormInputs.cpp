@@ -19,15 +19,15 @@ FormInputs	::	FormInputs()
 {
 	this->Connect(2,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
 	this->Connect(wxID_ANY, wxEVT_MEDIA_LOADED,wxMediaEventHandler(FormInputs::OnMediaLoad),(wxObject*)0);
-	
+	this->Connect(3,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::OptimizeBucketPlacement));
 }
 void FormInputs :: GetFileToPlay(wxCommandEvent& WXUNUSED(event))
 {
 	mNotebook -> ChangeSelection(2) ;
-	wxFileDialog fd = new wxFileDialog(mMediaPlayerPanel,_("<-----Select From List----->"),_(""),_(""),_("*.*"),wxOPEN,wxDefaultPosition,wxDefaultSize);
-	if(fd.ShowModal() == wxID_OK)
+	wxFileDialog m_fd = new wxFileDialog(mMediaPlayerPanel,_("<-----Select From List----->"),_(""),_(""),_("*.*"),wxOPEN,wxDefaultPosition,wxDefaultSize);
+	if(m_fd.ShowModal() == wxID_OK)
 	{
-		OnGetPath(fd.GetPath());
+		OnGetPath(m_fd.GetPath());
 	}
 
 }
@@ -50,6 +50,16 @@ void FormInputs::OnMediaLoad(wxMediaEvent& WXUNUSED(event))
 	}
 }
 
+void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
+{
+wxDialog *dialog = new wxDialog(NULL,3,_("Optimize"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_DIALOG_STYLE,"dialogbox");
+dialog->ShowModal();
+long res = wxGetNumberFromUser( _T("This is some text, actually a lot of text.\n")
+                                    _T("Even two rows of text."),
+                                    _T("Enter a number:"), _T("Numeric input test"),
+                                     50, 0, 100, this );
+
+}
 
 void
 FormInputs :: GetDredgeAreaData()

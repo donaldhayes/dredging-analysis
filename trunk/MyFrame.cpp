@@ -54,6 +54,7 @@ MyFrame :: AddButtons()
 	mSubmitButton      = new wxButton( mButtonPanel, 0, _T(" Submit "), wxPoint(100,100), wxDefaultSize ) ;
 	mRefreshButton     = new wxButton( mButtonPanel, 1, _T(" Refresh"), wxPoint(300,100), wxDefaultSize ) ;	
 	mMediaPlayerButton = new wxButton(mButtonPanel,2,wxT("File"), wxPoint(200,100),wxDefaultSize);
+	mOptimizeButton    = new wxButton(mButtonPanel,3,wxT("OptimizeBucketPlacement"),wxPoint(220,50),wxDefaultSize);
 
 }
 
