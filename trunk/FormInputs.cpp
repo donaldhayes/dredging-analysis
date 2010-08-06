@@ -52,13 +52,48 @@ void FormInputs::OnMediaLoad(wxMediaEvent& WXUNUSED(event))
 
 void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
 {
-wxDialog *dialog = new wxDialog(NULL,3,_("Optimize"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_DIALOG_STYLE,"dialogbox");
-dialog->ShowModal();
-long res = wxGetNumberFromUser( _T("This is some text, actually a lot of text.\n")
-                                    _T("Even two rows of text."),
-                                    _T("Enter a number:"), _T("Numeric input test"),
-                                     50, 0, 100, this );
+	wxDialog *mDialog = new wxDialog(NULL,3,_("Optimize"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_DIALOG_STYLE,"dialogbox");
+	wxBoxSizer *topSizer = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
 
+	wxString mJustificationChoices[2];
+    mJustificationChoices[0] = _("&Center Justified");
+    mJustificationChoices[1] = _("&Side Justified");
+
+	wxRadioBox* mCenter_Side = new wxRadioBox(mDialog, wxID_ANY, _(""),wxDefaultPosition, wxDefaultSize, 2, mJustificationChoices);
+    item0->Add(mCenter_Side, 0, wxGROW|wxALL, 5);
+	mCenter_Side->SetSelection(0);
+
+	wxString *mNumber_Buckets= new wxString[3];
+    mNumber_Buckets[0] = _("1");
+	mNumber_Buckets[1] = _("2");
+	mNumber_Buckets[2] = _("3");
+    wxStaticBox* staticBox3 = new wxStaticBox(mDialog, 9, _("Number of Buckets:"));
+
+    wxBoxSizer* styleSizer = new wxStaticBoxSizer( staticBox3, wxVERTICAL );
+    item0->Add(styleSizer, 0, wxGROW|wxALL, 5);
+
+    wxBoxSizer* itemSizer2 = new wxBoxSizer( wxVERTICAL );
+
+    wxChoice* choice2 = new wxChoice(mDialog, wxID_ANY, wxDefaultPosition, wxDefaultSize,5, mNumber_Buckets,0);
+	wxChoice* choice3 = new wxChoice(mDialog, wxID_ANY, wxDefaultPosition, wxDefaultSize,5, mNumber_Buckets,0);
+
+
+    itemSizer2->Add(new wxStaticText(mDialog, wxID_ANY, _("&Lateral Buckets:")), 0,wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP|wxADJUST_MINSIZE, 5);
+	
+    itemSizer2->Add(5, 5, 1, wxALL, 0);
+    itemSizer2->Add(choice2, 0, wxALL|wxLEFT, 5);
+	itemSizer2->Add(new wxStaticText(mDialog, wxID_ANY, _("&Longitudinal Buckets:")), 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP|wxADJUST_MINSIZE, 5);
+	itemSizer2->Add(choice3, 0, wxALL|wxLEFT, 5);
+
+    styleSizer->Add(itemSizer2, 0, wxGROW|wxALL, 5);
+	topSizer->Add( item0, 1, wxGROW|wxALIGN_CENTRE|wxALL, 5 );
+    topSizer->AddSpacer(5);
+	mDialog->SetSizer(topSizer);
+	this->SetAutoLayout(true);
+
+	mDialog->ShowModal();
+	mDialog->Destroy();
 }
 
 void
