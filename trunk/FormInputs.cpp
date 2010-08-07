@@ -5,6 +5,7 @@
 BEGIN_EVENT_TABLE( FormInputs, MyFrame )
 	EVT_BUTTON( 0, OnSubmit ) 
 	EVT_BUTTON( 1, OnRefresh ) 
+	//EVT_CHOICE(wxID_LATERAL_BUCKET, FormInputs::NumLateralBuckets)
 END_EVENT_TABLE()
 
 FormInputs	::	FormInputs()
@@ -20,6 +21,7 @@ FormInputs	::	FormInputs()
 	this->Connect(2,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
 	this->Connect(wxID_ANY, wxEVT_MEDIA_LOADED,wxMediaEventHandler(FormInputs::OnMediaLoad),(wxObject*)0);
 	this->Connect(3,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::OptimizeBucketPlacement));
+	this->Connect(wxID_LATERAL_BUCKET,wxEVT_COMMAND_CHOICE_SELECTED,wxCommandEventHandler(FormInputs::NumLateralBuckets));
 }
 void FormInputs :: GetFileToPlay(wxCommandEvent& WXUNUSED(event))
 {
@@ -52,7 +54,7 @@ void FormInputs::OnMediaLoad(wxMediaEvent& WXUNUSED(event))
 
 void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
 {
-	wxDialog *mDialog = new wxDialog(NULL,3,_("Optimize"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_DIALOG_STYLE,"dialogbox");
+	mDialog = new wxDialog(NULL,3,_("Optimize"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_DIALOG_STYLE,"dialogbox");
 	wxBoxSizer *topSizer = new wxBoxSizer( wxVERTICAL );
 	wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
 
@@ -75,8 +77,8 @@ void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
 
     wxBoxSizer* itemSizer2 = new wxBoxSizer( wxVERTICAL );
 
-    wxChoice* choice2 = new wxChoice(mDialog, wxID_ANY, wxDefaultPosition, wxDefaultSize,5, mNumber_Buckets,0);
-	wxChoice* choice3 = new wxChoice(mDialog, wxID_ANY, wxDefaultPosition, wxDefaultSize,5, mNumber_Buckets,0);
+     choice2 = new wxChoice(mDialog, wxID_LATERAL_BUCKET, wxDefaultPosition, wxDefaultSize,5, mNumber_Buckets,0);
+	wxChoice* choice3 = new wxChoice(mDialog, wxID_LONGITUDINAL_BUCKET, wxDefaultPosition, wxDefaultSize,5, mNumber_Buckets,0);
 
 
     itemSizer2->Add(new wxStaticText(mDialog, wxID_ANY, _("&Lateral Buckets:")), 0,wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP|wxADJUST_MINSIZE, 5);
@@ -94,7 +96,19 @@ void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
 
 	mDialog->ShowModal();
 	mDialog->Destroy();
+	
 }
+
+void FormInputs::NumLateralBuckets(wxCommandEvent& WXUNUSED(event))
+{
+	wxString msg;
+	int lSelection = choice2->GetCurrentSelection();
+	msg.Printf(_T("You've entered %d"), lSelection );
+	
+
+	
+}
+
 
 void
 FormInputs :: GetDredgeAreaData()
