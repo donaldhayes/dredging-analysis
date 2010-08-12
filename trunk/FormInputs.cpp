@@ -1,12 +1,13 @@
 #include "FormInputs.h"
 #include <cmath>
 #include <iostream>
-
+#include <wx/debug.h>
 BEGIN_EVENT_TABLE( FormInputs, MyFrame )
 	EVT_BUTTON( 0, OnSubmit ) 
 	EVT_BUTTON( 1, OnRefresh ) 
-	//EVT_CHOICE(wxID_LATERAL_BUCKET, FormInputs::NumLateralBuckets)
+	
 END_EVENT_TABLE()
+
 
 FormInputs	::	FormInputs()
 			:	mBoomLength(0), mMaxDredgeWidth(0), mMinDredgeReach(0), mMaxDredgeReach(0),
@@ -18,10 +19,11 @@ FormInputs	::	FormInputs()
 				MyFrame(_T( "Dredging Analysis") )
 
 {
-	this->Connect(2,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
+	this->Connect(wxID_MEDIA,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
 	this->Connect(wxID_ANY, wxEVT_MEDIA_LOADED,wxMediaEventHandler(FormInputs::OnMediaLoad),(wxObject*)0);
-	this->Connect(3,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::OptimizeBucketPlacement));
-	this->Connect(wxID_LATERAL_BUCKET,wxEVT_COMMAND_CHOICE_SELECTED,wxCommandEventHandler(FormInputs::NumLateralBuckets));
+	this->Connect(wxID_OPTIMIZE,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::OptimizeBucketPlacement));
+    mOptimizeDialog = new DialogInput();
+		
 }
 void FormInputs :: GetFileToPlay(wxCommandEvent& WXUNUSED(event))
 {
@@ -52,62 +54,6 @@ void FormInputs::OnMediaLoad(wxMediaEvent& WXUNUSED(event))
 	}
 }
 
-void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
-{
-	mDialog = new wxDialog(NULL,3,_("Optimize"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_DIALOG_STYLE,"dialogbox");
-	wxBoxSizer *topSizer = new wxBoxSizer( wxVERTICAL );
-	wxBoxSizer *item0 = new wxBoxSizer( wxVERTICAL );
-
-	wxString mJustificationChoices[2];
-    mJustificationChoices[0] = _("&Center Justified");
-    mJustificationChoices[1] = _("&Side Justified");
-
-	wxRadioBox* mCenter_Side = new wxRadioBox(mDialog, wxID_ANY, _(""),wxDefaultPosition, wxDefaultSize, 2, mJustificationChoices);
-    item0->Add(mCenter_Side, 0, wxGROW|wxALL, 5);
-	mCenter_Side->SetSelection(0);
-
-	wxString *mNumber_Buckets= new wxString[3];
-    mNumber_Buckets[0] = _("1");
-	mNumber_Buckets[1] = _("2");
-	mNumber_Buckets[2] = _("3");
-    wxStaticBox* staticBox3 = new wxStaticBox(mDialog, 9, _("Number of Buckets:"));
-
-    wxBoxSizer* styleSizer = new wxStaticBoxSizer( staticBox3, wxVERTICAL );
-    item0->Add(styleSizer, 0, wxGROW|wxALL, 5);
-
-    wxBoxSizer* itemSizer2 = new wxBoxSizer( wxVERTICAL );
-
-     choice2 = new wxChoice(mDialog, wxID_LATERAL_BUCKET, wxDefaultPosition, wxDefaultSize,5, mNumber_Buckets,0);
-	wxChoice* choice3 = new wxChoice(mDialog, wxID_LONGITUDINAL_BUCKET, wxDefaultPosition, wxDefaultSize,5, mNumber_Buckets,0);
-
-
-    itemSizer2->Add(new wxStaticText(mDialog, wxID_ANY, _("&Lateral Buckets:")), 0,wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP|wxADJUST_MINSIZE, 5);
-	
-    itemSizer2->Add(5, 5, 1, wxALL, 0);
-    itemSizer2->Add(choice2, 0, wxALL|wxLEFT, 5);
-	itemSizer2->Add(new wxStaticText(mDialog, wxID_ANY, _("&Longitudinal Buckets:")), 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP|wxADJUST_MINSIZE, 5);
-	itemSizer2->Add(choice3, 0, wxALL|wxLEFT, 5);
-
-    styleSizer->Add(itemSizer2, 0, wxGROW|wxALL, 5);
-	topSizer->Add( item0, 1, wxGROW|wxALIGN_CENTRE|wxALL, 5 );
-    topSizer->AddSpacer(5);
-	mDialog->SetSizer(topSizer);
-	this->SetAutoLayout(true);
-
-	mDialog->ShowModal();
-	mDialog->Destroy();
-	
-}
-
-void FormInputs::NumLateralBuckets(wxCommandEvent& WXUNUSED(event))
-{
-	wxString msg;
-	int lSelection = choice2->GetCurrentSelection();
-	msg.Printf(_T("You've entered %d"), lSelection );
-	
-
-	
-}
 
 
 void
@@ -169,7 +115,6 @@ FormInputs :: GetBucketData()
 void
 FormInputs :: OnSubmit( wxCommandEvent& SubmitEvent )
 {
-
 	GetDredgeAreaData() ;
 	GetMachineData() ;
 	GetBucketData() ;
@@ -230,7 +175,6 @@ FormInputs :: Calculate_SwingCharacteristics()
 	wxStaticText* lStaticText = new wxStaticText( mResultsPanelTab, wxID_ANY, lString, wxPoint(50,50), wxDefaultSize, 0, _T("Static Dredge Area Length Label") ) ;
 
 }
-
 void
 FormInputs :: Calculate_LateralBucketPlacements()
 {
@@ -281,4 +225,12 @@ FormInputs :: Calculate_BucketRows()
 	std::cout << " \n\nNumber of bucket rows:\t" << lnumBucketRows <<std::endl ;
 	std::cout << " Longitudinal bucket overlap to fix bucket exactly:\t" << lLongitudinalOverlap <<std::endl ;
 
+}
+void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
+{
+	OptimizeBucket();
+}
+void FormInputs::OptimizeBucket()
+{
+	mOptimizeDialog->ShowModal();
 }

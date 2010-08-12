@@ -9,7 +9,6 @@
 #include <wx/log.h>
 #include <wx/sizer.h>
 #include <wx/dialog.h>
-#include <wx/numdlg.h>
 
 class MyFrame : public wxFrame
 {
@@ -24,8 +23,8 @@ class MyFrame : public wxFrame
 		void BucketData() ;
 		void DredgeAreaData() ;
 		void AddMediaPlayer();
-		//void OnMediaLoad(wxMediaEvent& event);
-
+		enum { wxID_MEDIA = 2,wxID_OPTIMIZE };
+		
 	protected:
 
 		wxPanel *mButtonPanel, *mNotebookPanel ;
@@ -46,9 +45,9 @@ class MyFrame : public wxFrame
 		wxTextCtrl *mDredgeArea_Width, *mDredgeArea_Length, *mDredgeArea_LateralOverlap, *mDredgeArea_LongitudinalOverlap ;
 
 		wxMediaCtrl *mMediaPlayer;
-
+		
 		int xxxx ;
-
+		
 };
 
 

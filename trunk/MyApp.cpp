@@ -8,7 +8,6 @@ MyApp :: OnInit()
 		return false ;
 
 	FormInputs* frame = new FormInputs() ;
-
 	frame->Show( true ) ;
 
 	return true ;

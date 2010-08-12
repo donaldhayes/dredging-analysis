@@ -1,14 +1,16 @@
+
 #ifndef FORM_INPUTS_H
 #define FORM_INPUTS_H
 
 #include "MyFrame.h"
+#include "DialogInput.h"
+
 
 
 class FormInputs : public MyFrame
 {
 	public:
 		FormInputs() ;
-		
 		void GetDredgeAreaData() ;
 		void GetMachineData() ;
 		void GetBucketData() ;
@@ -16,8 +18,11 @@ class FormInputs : public MyFrame
 		void GetFileToPlay(wxCommandEvent& event);
 		void OnGetPath(const wxString& path);
 		void OnMediaLoad(wxMediaEvent& event);
+
+
 		void OptimizeBucketPlacement(wxCommandEvent& event);
-		void NumLateralBuckets(wxCommandEvent& event);
+		void NumLateralBuckets(wxCommandEvent& );
+		void OptimizeBucket();
 
 		float ConvertWXStringToFloat( wxString ) ;
 		wxString ConvertFloatToWXString( float ) ;
@@ -28,18 +33,16 @@ class FormInputs : public MyFrame
 		void Calculate_SwingCharacteristics() ;
 		void Calculate_LateralBucketPlacements() ;
 		void Calculate_BucketRows() ;
-		enum { wxID_LATERAL_BUCKET = 12,wxID_LONGITUDINAL_BUCKET  };
+		friend class DialogInput;	
+
+		DialogInput *mOptimizeDialog;	
 	
 	private:
 		float mBoomLength, mMaxDredgeWidth, mMinDredgeReach, mMaxDredgeReach ;
 		float mDredgeAreaWidth, mDredgeAreaLength, mDredgeAreaLateralOverlap, mDredgeAreaLongitudinalOverlap ;
 		float mBucketWidth, mBucketLength, mPenetrationDepth ;
-
 		float mSwingArcLength ;
-
-		wxDialog *mDialog;
-		wxChoice *choice2;
-
+		
 		DECLARE_EVENT_TABLE()
 };
 

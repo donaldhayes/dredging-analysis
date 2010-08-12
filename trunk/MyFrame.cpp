@@ -9,8 +9,9 @@ MyFrame:: MyFrame( const wxString& lTitle )
 		  mButtonPanel( NULL ), 
 		  mSubmitButton( NULL ), 
 		  mRefreshButton( NULL ),
+		  mOptimizeButton( NULL),
 		  xxxx(90),
-		  wxFrame( NULL, wxID_ANY, lTitle, wxDefaultPosition, wxSize(500,700), wxDEFAULT_FRAME_STYLE, wxString(_T("Frame")) )
+		  wxFrame( NULL, wxID_ANY, lTitle, wxDefaultPosition, wxSize(500,700), wxDEFAULT_FRAME_STYLE, wxString(_T("Frame")))
 {
 
 	AddPageIndexes() ;
@@ -18,7 +19,6 @@ MyFrame:: MyFrame( const wxString& lTitle )
 
 	AddDataPageContent() ;
 	AddMediaPlayer();
-
 }
 
 void MyFrame :: AddPageIndexes()
@@ -32,12 +32,13 @@ void MyFrame :: AddPageIndexes()
 	mNotebook->AddPage( mDataPanelTab, _T(" Data "),true, 1 ) ;
 	mNotebook->AddPage( mResultsPanelTab, _T(" Results " ), false, 2 ) ;
 	mNotebook->AddPage(mMediaPlayerPanel,_T(" MediaPlayer "), false, 3);
+
 }
 void MyFrame::AddMediaPlayer()
 {
 	mMediaPlayer = new wxMediaCtrl();
 	wxFlexGridSizer* sizer = new wxFlexGridSizer(2, 1, 0, 0);
-
+	
 	mMediaPlayer->Create(mMediaPlayerPanel,wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0,wxMEDIABACKEND_WMP10);
 	mMediaPlayerPanel->SetSizer(sizer);
     mMediaPlayerPanel->SetAutoLayout(true);
@@ -53,19 +54,17 @@ MyFrame :: AddButtons()
 	mButtonPanel       = new wxPanel( this, wxID_ANY, wxPoint(0,500), wxSize(500,200), wxTAB_TRAVERSAL, wxString(_T("Panel")) ) ;
 	mSubmitButton      = new wxButton( mButtonPanel, 0, _T(" Submit "), wxPoint(100,100), wxDefaultSize ) ;
 	mRefreshButton     = new wxButton( mButtonPanel, 1, _T(" Refresh"), wxPoint(300,100), wxDefaultSize ) ;	
-	mMediaPlayerButton = new wxButton(mButtonPanel,2,wxT("File"), wxPoint(200,100),wxDefaultSize);
-	mOptimizeButton    = new wxButton(mButtonPanel,3,wxT("OptimizeBucketPlacement"),wxPoint(220,50),wxDefaultSize);
+	mMediaPlayerButton = new wxButton(mButtonPanel,wxID_MEDIA,wxT("File"), wxPoint(200,100),wxDefaultSize);
+	mOptimizeButton   = new wxButton(mButtonPanel,wxID_OPTIMIZE,_("Optimize Overlap"),wxPoint(200,150),wxDefaultSize);
 
 }
 
 void
 MyFrame :: AddDataPageContent()
 {
-	
 	DredgeAreaData() ;
 	MachineData() ;
 	BucketData() ;
-
 }
 
 void
@@ -73,7 +72,7 @@ MyFrame :: DredgeAreaData()
 {
 	
 	mDredgeAreaData						= new wxStaticBox ( mDataPanelTab, wxID_ANY, _T("&Dredge Area"), wxDefaultPosition, wxSize(475,170), 0, _T("Dredge Area Data Boundary") ) ;
-	
+
 	mST_DredgeArea_Length				= new wxStaticText( mDataPanelTab, wxID_ANY, _T("Length"), wxPoint(50,50), wxDefaultSize, 0, _T("Static Dredge Area Length Label") ) ;
 	mST_DredgeArea_Width				= new wxStaticText( mDataPanelTab, wxID_ANY, _T("Width"),  wxPoint(50,120),wxDefaultSize, 0, _T("Static Dredge Area Width Label" ) ) ;
 	mST_DredgeArea_LateralOverlap		= new wxStaticText( mDataPanelTab, wxID_ANY, _T("Lateral Overlap"), wxPoint(250,50), wxDefaultSize, 0, _T("Static Dredge Area Lateral Overlap Label") );
@@ -119,4 +118,3 @@ MyFrame :: BucketData()
 	mBucket_PenetrationDepth			= new wxTextCtrl( mDataPanelTab, wxID_ANY, wxEmptyString, wxPoint(400,403), wxSize(50,23), 0, wxDefaultValidator, _T("Text Box To Enter Bucket Penetration Depth") ) ;
 
 }
-
