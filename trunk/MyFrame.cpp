@@ -55,7 +55,7 @@ MyFrame :: AddButtons()
 	mSubmitButton      = new wxButton( mButtonPanel, 0, _T(" Submit "), wxPoint(100,100), wxDefaultSize ) ;
 	mRefreshButton     = new wxButton( mButtonPanel, 1, _T(" Refresh"), wxPoint(300,100), wxDefaultSize ) ;	
 	mMediaPlayerButton = new wxButton(mButtonPanel,wxID_MEDIA,wxT("File"), wxPoint(200,100),wxDefaultSize);
-	mOptimizeButton   = new wxButton(mButtonPanel,wxID_OPTIMIZE,_("Optimize Overlap"),wxPoint(200,150),wxDefaultSize);
+	mOptimizeButton   = new wxButton(mButtonPanel,wxID_OPTIMIZE,_("Optimize Overlap"),wxPoint(200,50),wxDefaultSize);
 
 }
 

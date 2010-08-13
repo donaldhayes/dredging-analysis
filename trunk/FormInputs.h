@@ -26,6 +26,7 @@ class FormInputs : public MyFrame
 
 		float ConvertWXStringToFloat( wxString ) ;
 		wxString ConvertFloatToWXString( float ) ;
+		wxString ConvertFloatToWXStrin( float );
 
 		void OnSubmit( wxCommandEvent& ) ;
 		void OnRefresh( wxCommandEvent& ) ;
@@ -36,8 +37,7 @@ class FormInputs : public MyFrame
 		friend class DialogInput;	
 
 		DialogInput *mOptimizeDialog;	
-	
-	private:
+
 		float mBoomLength, mMaxDredgeWidth, mMinDredgeReach, mMaxDredgeReach ;
 		float mDredgeAreaWidth, mDredgeAreaLength, mDredgeAreaLateralOverlap, mDredgeAreaLongitudinalOverlap ;
 		float mBucketWidth, mBucketLength, mPenetrationDepth ;

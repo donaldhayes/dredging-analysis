@@ -25,7 +25,7 @@ class MyFrame : public wxFrame
 		void AddMediaPlayer();
 		enum { wxID_MEDIA = 2,wxID_OPTIMIZE };
 		
-	protected:
+protected:	
 
 		wxPanel *mButtonPanel, *mNotebookPanel ;
 		wxPanel *mDataPanelTab, *mResultsPanelTab ;
