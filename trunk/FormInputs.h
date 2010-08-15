@@ -26,8 +26,7 @@ class FormInputs : public MyFrame
 
 		float ConvertWXStringToFloat( wxString ) ;
 		wxString ConvertFloatToWXString( float ) ;
-		wxString ConvertFloatToWXStrin( float );
-
+		
 		void OnSubmit( wxCommandEvent& ) ;
 		void OnRefresh( wxCommandEvent& ) ;
 

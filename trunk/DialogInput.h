@@ -9,23 +9,25 @@ class FormInputs;
 class DialogInput :public wxDialog
 {
 public:
-	DialogInput();
-	
-	void AddOptimizeDialog();
-		wxChoice *mLateralChoice,*mLongitudinalChoice;
-		wxRadioBox* mCenterSideRadio;
-		wxTextCtrl *mLateralOverlap,*mLongitudinalOverlap,*mBucket,*mDredgeArea,*mBoom;
-		FormInputs *mFormInput;
-		enum { wxID_RADIO,wxID_LATERAL_BUCKET ,wxID_LONGITUDINAL_BUCKET };
-		DECLARE_EVENT_TABLE()
+	FormInputs *mFormInput;
 
-		void GetOverlap(wxCommandEvent& event);
-		float Cal_SwingCharacteristics() ;
-		void GetOverLapCalculate();
-		void GetSwingCalculationInputs();
-		float *mBucketLength,*mDredgeAreaLength,*mBoomLength ;
-		friend class FormInputs;
-		
+	DialogInput(int );
+	void AddOptimizeDialog(int);
+	void GetOverlap(wxCommandEvent& event);
+	float Cal_SwingCharacteristics();
+	void GetOverLapCalculate();
+	void GetSwingCalculationInputs();
+	
+	enum { wxID_RADIO,wxID_LATERAL_BUCKET ,wxID_LONGITUDINAL_BUCKET };
+
+	wxChoice *mLateralChoice,*mLongitudinalChoice;
+	wxRadioBox* mCenterSideRadio;
+	wxTextCtrl *mLateralOverlap,*mLongitudinalOverlap,*mBucket,*mDredgeArea,*mBoom;
+	float *mBucketLength,*mDredgeAreaLength,*mBoomLength ;
+	
+	DECLARE_EVENT_TABLE()
+
+	friend class FormInputs;
 	
 };
 #endif

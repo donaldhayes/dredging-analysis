@@ -22,7 +22,7 @@ FormInputs	::	FormInputs()
 	this->Connect(wxID_MEDIA,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
 	this->Connect(wxID_ANY, wxEVT_MEDIA_LOADED,wxMediaEventHandler(FormInputs::OnMediaLoad),(wxObject*)0);
 	this->Connect(wxID_OPTIMIZE,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::OptimizeBucketPlacement));
-  mOptimizeDialog = new DialogInput();
+  
 		
 }
 void FormInputs :: GetFileToPlay(wxCommandEvent& WXUNUSED(event))
@@ -163,12 +163,6 @@ FormInputs :: ConvertFloatToWXString( float lFloat )
 	return  wxString::Format(wxT("%f"), lFloat) ;
 }
 
-wxString
-FormInputs :: ConvertFloatToWXStrin( float lFloat )
-{
-	return  wxString::Format(wxT("%f"), lFloat) ;
-}
-
 void
 FormInputs :: Calculate_SwingCharacteristics()
 {
@@ -234,21 +228,18 @@ FormInputs :: Calculate_BucketRows()
 }
 void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
 {
-
 	GetDredgeAreaData() ;
 	GetMachineData() ;
 	GetBucketData() ;
+	int lBucketNumber =ceil( mDredgeAreaWidth/mBucketWidth);
+	mOptimizeDialog = new DialogInput(lBucketNumber);
 	OptimizeBucket();
 }
 void FormInputs::OptimizeBucket()
 {
-	//mOptimizeDialog = new DialogInput();
-	//float *lTempBoomLength = &(mOptimizeDialog->mBoomLength) ;
-	//*lTempBoomLength = mBoomLength;
 	mOptimizeDialog->mBoomLength = &mBoomLength;
 	mOptimizeDialog->mBucketLength = &mBucketLength;
 	mOptimizeDialog->mDredgeAreaLength = &mDredgeAreaLength;
-	//*(mOptimizeDialog->mBoomLength) = mBoomLength; 
 	mOptimizeDialog->ShowModal();
 
 }
