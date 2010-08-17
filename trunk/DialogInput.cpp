@@ -112,11 +112,12 @@ void DialogInput::LateralLongitudinalOverLapCalculate()
 
 void DialogInput::LateralOverLapCalculate()
 {
-	int lRadioSelection;
+	int lRadioSelection = 0;
 	lRadioSelection = mCenterSideRadio->GetSelection();
 	wxString lLateralString,lLateralOverlap;
-	float lBucketLength = *mBucketLength,lBucketWidth = *mBucketWidth,lLateralChoiceSelection =0,lCenterJustify=0,lSideJustify=0;
-	float lSwingArcLength = Cal_SwingCharacteristics() ;
+	float lBucketLength = *mBucketLength,lLateralChoiceSelection =0,lCenterJustify=0,lSideJustify=0;
+	float lSwingArcLength = 0;
+	lSwingArcLength = Cal_SwingCharacteristics() ;
 	lLateralString = mLateralChoice->GetStringSelection();
 	lLateralChoiceSelection = mFormInput->ConvertWXStringToFloat(lLateralString );
 	if(lRadioSelection == 0)
@@ -128,7 +129,7 @@ void DialogInput::LateralOverLapCalculate()
 	}
 	else
 	{
-		lSideJustify = (( lLateralChoiceSelection* lBucketLength) - (lBucketLength + lLateralChoiceSelection) /
+		lSideJustify = (( lLateralChoiceSelection * lBucketLength) - (lBucketLength + lLateralChoiceSelection) /
 		               (lLateralChoiceSelection - 2));
 		
 		lLateralOverlap = mFormInput->ConvertFloatToWXString( lSideJustify );
