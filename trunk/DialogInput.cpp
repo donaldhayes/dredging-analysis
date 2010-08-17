@@ -1,42 +1,35 @@
 #include "DialogInput.h"
 
 BEGIN_EVENT_TABLE(DialogInput, wxDialog )
-	EVT_CHOICE(wxID_LATERAL_BUCKET,DialogInput::GetOverlap)
-	EVT_RADIOBOX(wxID_RADIO,DialogInput::GetOverlap)
+	EVT_CHOICE(wxID_LATERAL_BUCKET,DialogInput::GetLateralOverlap)
+	EVT_RADIOBOX(wxID_RADIO,DialogInput::GetLateralLongitudinalOverlap)
+	EVT_CHOICE(wxID_LONGITUDINAL_BUCKET,DialogInput::GetLongitudinalOverlap)
 END_EVENT_TABLE()
 
-DialogInput::DialogInput(int lBucketNumber)
-			:wxDialog(NULL,wxID_ANY,_("Optimize Bucket"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_DIALOG_STYLE,_("dialogbox"))
+DialogInput::DialogInput(int lLateralBucketNumber,int lLongBucketNumber)
+			:wxDialog(NULL,wxID_ANY,_("Optimal Overlap"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_DIALOG_STYLE,_("dialogbox"))
 {
-	AddOptimizeDialog(lBucketNumber);
+	AddOptimizeDialog(lLateralBucketNumber,lLongBucketNumber);
 }
 
-void DialogInput ::AddOptimizeDialog(int lBucketNumber)
+void DialogInput ::AddOptimizeDialog(int lLateralBucketNumber,int lLongBucketNumber)
 {	
-	int i=0,j=lBucketNumber,k=16 ;
+	int i=0,j=lLateralBucketNumber,k=16,l =lLongBucketNumber  ;
 	wxString *mNumber_Buckets= new wxString[k];	
+	wxString *mNumber_BucketsLong= new wxString[k];	
+
 	for( i=0;i<k;i++)
 	{
 		 mNumber_Buckets[i] =  wxString::Format(wxT("%i"),j);
 		j++;
-	}
+	}	
+	i = 0;
+	for( i=0;i<k;i++)
+	{
+		 mNumber_BucketsLong[i] =  wxString::Format(wxT("%i"),l);
+		l++;
+	}	
 
-	/*wxStaticBox* mValueEntryBox = new wxStaticBox(this,wxID_STATIC,_("Enter Values"),wxDefaultPosition,wxDefaultSize,0);
-	wxBoxSizer* styleSizer1 = new wxStaticBoxSizer( mValueEntryBox, wxHORIZONTAL );
-	mRadioSizer->Add(styleSizer1, 0, wxGROW|wxALL, 5);
-	wxBoxSizer* itemSizer3 = new wxBoxSizer( wxHORIZONTAL );
-	
-    itemSizer3->Add(5, 5, 1, wxALL|wxRIGHT, 0);
-	mBucket = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("Text Box To Enter Dredge Area Lateral Overlap") ) ;
-	itemSizer3->Add(mBucket,0,wxALL,5);
-
-	mDredgeArea = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("Text Box To Enter Dredge Area Lateral Overlap") ) ;
-	itemSizer3->Add(mDredgeArea,0,wxALL,5);
-
-	mBoom = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("Text Box To Enter Dredge Area Lateral Overlap") ) ;
-	itemSizer3->Add(mBoom,0,wxALL,5);
-	styleSizer1->Add(itemSizer3, 0, wxGROW|wxALL, 5); */
-	
 	wxBoxSizer *mTopSizer = new wxBoxSizer( wxVERTICAL );
     wxBoxSizer *mRadioSizer = new wxBoxSizer( wxVERTICAL );
 
@@ -62,7 +55,7 @@ void DialogInput ::AddOptimizeDialog(int lBucketNumber)
 
 	wxBoxSizer* itemSizer4 = new wxBoxSizer( wxHORIZONTAL );
 	itemSizer4->Add(new wxStaticText(this, wxID_STATIC, _("&Longitudinal Buckets:   ")), 0, wxALIGN_TOP, 5);
-	mLongitudinalChoice = new wxChoice(this, wxID_LONGITUDINAL_BUCKET , wxDefaultPosition, wxDefaultSize,15, mNumber_Buckets,0);
+	mLongitudinalChoice = new wxChoice(this, wxID_LONGITUDINAL_BUCKET , wxDefaultPosition, wxDefaultSize,15, mNumber_BucketsLong,0);
 	itemSizer4->Add(mLongitudinalChoice, 0, wxALIGN_CENTER_HORIZONTAL|wxALIGN_TOP, 5);
 	wxBoxSizer* itemSizer5 = new wxBoxSizer( wxHORIZONTAL );
 	itemSizer5->Add(new wxStaticText(this, wxID_STATIC, _("&Longitudinal Overlap:   ")), 0,wxALIGN_TOP, 5);
@@ -103,41 +96,37 @@ float DialogInput :: Cal_SwingCharacteristics()
 }
 
 
-void DialogInput::GetOverlap(wxCommandEvent& WXUNUSED(event))
+void DialogInput::GetLateralLongitudinalOverlap(wxCommandEvent& WXUNUSED(event))
 {
 	
-	GetOverLapCalculate();
+	LateralLongitudinalOverLapCalculate();
 
 }
 
-void DialogInput::GetOverLapCalculate()
+void DialogInput::LateralLongitudinalOverLapCalculate()
 {
-	wxString lString,lLateralString,lLateralOverlap,lLongitudunalString,lLongitudinalOverlap;
+	LateralOverLapCalculate();
+	LongitudinalOverLapCalculate();
+}
+
+
+void DialogInput::LateralOverLapCalculate()
+{
 	int lRadioSelection;
-	float lBucketLength = *mBucketLength;
-	float lLateralChoiceSelection,lCenterJustify,lSideJustify;
+	lRadioSelection = mCenterSideRadio->GetSelection();
+	wxString lLateralString,lLateralOverlap;
+	float lBucketLength = *mBucketLength,lBucketWidth = *mBucketWidth,lLateralChoiceSelection =0,lCenterJustify=0,lSideJustify=0;
 	float lSwingArcLength = Cal_SwingCharacteristics() ;
-	
-	
-/*	lString = mFormInput->ConvertFloatToWXString((*mBoomLength));
-	mBoom->ChangeValue(lString);
-	lString = mFormInput->ConvertFloatToWXString((*mBucketLength));
-	mBucket->ChangeValue(lString);
-	lString = mFormInput->ConvertFloatToWXString((*mDredgeAreaLength));
-	mDredgeArea->ChangeValue(lString);*/
 	lLateralString = mLateralChoice->GetStringSelection();
 	lLateralChoiceSelection = mFormInput->ConvertWXStringToFloat(lLateralString );
-	lRadioSelection = mCenterSideRadio->GetSelection();
-	
 	if(lRadioSelection == 0)
 	{
 		lCenterJustify = lBucketLength - ((lSwingArcLength - lBucketLength)/
 										 (lLateralChoiceSelection - 1)) ;
 		lLateralOverlap = mFormInput->ConvertFloatToWXString( lCenterJustify );
 		mLateralOverlap->ChangeValue(lLateralOverlap);
-
 	}
-	else 
+	else
 	{
 		lSideJustify = (( lLateralChoiceSelection* lBucketLength) - (lBucketLength + lLateralChoiceSelection) /
 		               (lLateralChoiceSelection - 2));
@@ -145,5 +134,39 @@ void DialogInput::GetOverLapCalculate()
 		lLateralOverlap = mFormInput->ConvertFloatToWXString( lSideJustify );
 		mLateralOverlap->ChangeValue(lLateralOverlap);
 	}
+}
 
+void DialogInput::GetLateralOverlap(wxCommandEvent& WXUNUSED(event))
+{
+	LateralOverLapCalculate();
+}
+
+void DialogInput::LongitudinalOverLapCalculate()
+{
+	int lRadioSelection;
+	wxString lString,lLongitudunalString,lLongitudinalOverlap;
+	float lBucketLength = *mBucketLength,lBucketWidth = *mBucketWidth;
+	lRadioSelection = mCenterSideRadio->GetSelection();
+	float lCenterJustify,lSideJustify,lLongitudinalChoiceSelection; ;
+	lLongitudunalString = mLongitudinalChoice->GetStringSelection();
+	lLongitudinalChoiceSelection = mFormInput->ConvertWXStringToFloat(lLongitudunalString );
+	if(lRadioSelection == 0)
+	{
+		lCenterJustify = lBucketWidth - ( (*mDredgeAreaLength) / lLongitudinalChoiceSelection ) + 1 ;
+		lLongitudinalOverlap = mFormInput->ConvertFloatToWXString( lCenterJustify );
+		mLongitudinalOverlap->ChangeValue(lLongitudinalOverlap);
+	}
+	else
+	{
+		lSideJustify= lBucketWidth - ( (*mDredgeAreaLength) / lLongitudinalChoiceSelection ) + 1 ;
+		lLongitudinalOverlap = mFormInput->ConvertFloatToWXString( lSideJustify );
+		mLongitudinalOverlap->ChangeValue(lLongitudinalOverlap);
+	}
+
+
+}
+
+void DialogInput::GetLongitudinalOverlap(wxCommandEvent& WXUNUSED(event))
+{
+	LongitudinalOverLapCalculate();
 }

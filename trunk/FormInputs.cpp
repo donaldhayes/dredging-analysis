@@ -231,8 +231,9 @@ void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
 	GetDredgeAreaData() ;
 	GetMachineData() ;
 	GetBucketData() ;
-	int lBucketNumber =ceil( mDredgeAreaWidth/mBucketWidth);
-	mOptimizeDialog = new DialogInput(lBucketNumber);
+	int lLateralBucketNumber =ceil( mDredgeAreaWidth/mBucketWidth);
+	int lLongitudinalBucketNumber = ceil(mDredgeAreaLength/mBucketLength);
+	mOptimizeDialog = new DialogInput(lLateralBucketNumber,lLongitudinalBucketNumber );
 	OptimizeBucket();
 }
 void FormInputs::OptimizeBucket()
@@ -240,6 +241,7 @@ void FormInputs::OptimizeBucket()
 	mOptimizeDialog->mBoomLength = &mBoomLength;
 	mOptimizeDialog->mBucketLength = &mBucketLength;
 	mOptimizeDialog->mDredgeAreaLength = &mDredgeAreaLength;
+	mOptimizeDialog->mBucketWidth = &mBucketWidth;
 	mOptimizeDialog->ShowModal();
 
 }
