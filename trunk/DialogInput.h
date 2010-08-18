@@ -34,8 +34,6 @@ public:
 	
 	DECLARE_EVENT_TABLE()
 
-	//void RadioSelect(wxCommandEvent& event);
-
 	friend class FormInputs;
 	
 };
