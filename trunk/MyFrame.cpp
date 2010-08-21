@@ -54,10 +54,15 @@ MyFrame :: AddButtons()
 	mButtonPanel       = new wxPanel( this, wxID_ANY, wxPoint(0,500), wxSize(500,200), wxTAB_TRAVERSAL, wxString(_T("Panel")) ) ;
 	mSubmitButton      = new wxButton( mButtonPanel, 0, _T(" Submit "), wxPoint(100,100), wxDefaultSize ) ;
 	mRefreshButton     = new wxButton( mButtonPanel, 1, _T(" Refresh"), wxPoint(300,100), wxDefaultSize ) ;	
-	mMediaPlayerButton = new wxButton(mButtonPanel,wxID_MEDIA,wxT("File"), wxPoint(200,100),wxDefaultSize);
+	//mMediaPlayerButton = new wxButton(mButtonPanel,wxID_MEDIA,wxT("File"), wxPoint(200,100),wxDefaultSize);
 	mOptimizeButton   = new wxButton(mButtonPanel,wxID_OPTIMIZE,_("Optimize Overlap"),wxPoint(200,50),wxDefaultSize);
-
-}
+	mPlayList= new wxString[3];	
+	mPlayList[0] = _("Dredging Video 1");
+	mPlayList[1] = _("Dredging Video 2");
+	mPlayList[2] = _("Dredging Video 3");
+	mMediaText = new wxStaticText ( mButtonPanel, wxID_ANY, _("&SELECT FILE TO PLAY"), wxPoint(25,25), wxDefaultSize, 0, _T("Choose The Play") ) ;
+	mMediaSelect = new wxChoice(mButtonPanel,wxID_MEDIACHOICE,wxPoint(25,50),wxDefaultSize,3,mPlayList,0);
+	}
 
 void
 MyFrame :: AddDataPageContent()

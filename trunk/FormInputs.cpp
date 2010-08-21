@@ -5,6 +5,7 @@
 BEGIN_EVENT_TABLE( FormInputs, MyFrame )
 	EVT_BUTTON( 0, OnSubmit ) 
 	EVT_BUTTON( 1, OnRefresh ) 
+	EVT_CHOICE(wxID_MEDIACHOICE,PlaySelectedFile)
 	
 END_EVENT_TABLE()
 
@@ -19,13 +20,13 @@ FormInputs	::	FormInputs()
 				MyFrame(_T( "Dredging Analysis") )
 
 {
-	this->Connect(wxID_MEDIA,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
+//	this->Connect(wxID_MEDIA,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
 	this->Connect(wxID_ANY, wxEVT_MEDIA_LOADED,wxMediaEventHandler(FormInputs::OnMediaLoad),(wxObject*)0);
 	this->Connect(wxID_OPTIMIZE,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::OptimizeBucketPlacement));
   
 		
 }
-void FormInputs :: GetFileToPlay(wxCommandEvent& WXUNUSED(event))
+/*void FormInputs :: GetFileToPlay(wxCommandEvent& WXUNUSED(event))
 {
 	mNotebook -> ChangeSelection(2) ;
 	wxFileDialog m_fd = new wxFileDialog(mMediaPlayerPanel,_("<-----Select From List----->"),_(""),_(""),_("*.*"),wxOPEN,wxDefaultPosition,wxDefaultSize);
@@ -39,7 +40,7 @@ void FormInputs ::OnGetPath(const wxString& path)
 {
 	bool lLoadCheck = mMediaPlayer->Load(path);
 }
-
+*/
 
 void FormInputs::OnMediaLoad(wxMediaEvent& WXUNUSED(event))
 {
@@ -50,10 +51,27 @@ void FormInputs::OnMediaLoad(wxMediaEvent& WXUNUSED(event))
 	}
 	else
 	{
-		wxLogMessage(wxT("Unable To Play the File"));
+		wxLogMessage(wxT("Unable To Load"));
 	}
 }
 
+void FormInputs::PlaySelectedFile(wxCommandEvent& WXUNUSED(event))
+{
+	mNotebook -> ChangeSelection(2) ;
+	wxString lString = mMediaSelect->GetStringSelection();
+		if(lString.Cmp(mPlayList[0]) == 0)
+		{
+			mMediaPlayer->Load("C:\\Users\\bharath\\Downloads\\Cable_Arm_Bucket_Test.wmv");
+		}
+		else if(lString.Cmp(mPlayList[1]) == 0)
+		{
+			mMediaPlayer->Load("C:\\Users\\bharath\\Downloads\\Inception.2010.TS.XVID-PrisM\\PrisM-Inception.2010\\Inception.avi");
+		}
+		else
+		{
+			mMediaPlayer->Load("C:\\Users\\bharath\\Downloads\\Inception.2010.TS.XVID-PrisM\\PrisM-Inception.2010\\Inception.avi");
+		}
+}
 
 
 void

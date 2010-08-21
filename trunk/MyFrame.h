@@ -9,6 +9,9 @@
 #include <wx/log.h>
 #include <wx/sizer.h>
 #include <wx/dialog.h>
+//using <mscorlib.dll>
+//using namespace System;
+//using namespace System::IO;
 
 class MyFrame : public wxFrame
 {
@@ -23,7 +26,7 @@ class MyFrame : public wxFrame
 		void BucketData() ;
 		void DredgeAreaData() ;
 		void AddMediaPlayer();
-		enum { wxID_MEDIA = 2,wxID_OPTIMIZE };
+		enum { wxID_MEDIA = 2,wxID_OPTIMIZE,wxID_MEDIACHOICE };
 		
 protected:	
 
@@ -33,8 +36,11 @@ protected:
 		wxPanel *mMediaPlayerPanel;
 		wxNotebook *mNotebook, *mFirstChildNotebook;
 		wxButton *mSubmitButton, *mRefreshButton, *mMediaPlayerButton,*mOptimizeButton;
+		wxChoice *mMediaSelect;
+		wxString *mPlayList;
 
 		wxStaticBox *mMachineData, *mBucketData, *mDredgeAreaData ;
+		wxStaticText *mMediaText;
 
 		wxStaticText *mST_Machine_BoomLength, *mST_Machine_MaxDredgeWidth, *mST_Machine_MinDredgeReach, *mST_Machine_MaxDredgeReach ;
 		wxStaticText *mST_Bucket_Width, *mST_Bucket_Length, *mST_Bucket_PenetrationDepth ;
