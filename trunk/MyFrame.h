@@ -9,9 +9,6 @@
 #include <wx/log.h>
 #include <wx/sizer.h>
 #include <wx/dialog.h>
-//using <mscorlib.dll>
-//using namespace System;
-//using namespace System::IO;
 
 class MyFrame : public wxFrame
 {
