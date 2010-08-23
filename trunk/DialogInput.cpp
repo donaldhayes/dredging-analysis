@@ -4,6 +4,8 @@ BEGIN_EVENT_TABLE(DialogInput, wxDialog )
 	EVT_CHOICE(wxID_LATERAL_BUCKET,DialogInput::GetLateralOverlap)
 	EVT_RADIOBOX(wxID_RADIO,DialogInput::GetLateralLongitudinalOverlap)
 	EVT_CHOICE(wxID_LONGITUDINAL_BUCKET,DialogInput::GetLongitudinalOverlap)
+	EVT_BUTTON( wxID_OKBUTTON, onOk ) 
+	EVT_CLOSE(onQuit)
 END_EVENT_TABLE()
 
 DialogInput::DialogInput(int lLateralBucketNumber,int lLongBucketNumber)
@@ -29,7 +31,6 @@ void DialogInput ::AddOptimizeDialog(int lLateralBucketNumber,int lLongBucketNum
 		 mNumber_BucketsLong[i] =  wxString::Format(wxT("%i"),l);
 		l++;
 	}	
-
 	wxBoxSizer *mTopSizer = new wxBoxSizer( wxVERTICAL );
     wxBoxSizer *mRadioSizer = new wxBoxSizer( wxVERTICAL );
 
@@ -77,7 +78,7 @@ void DialogInput ::AddOptimizeDialog(int lLateralBucketNumber,int lLongBucketNum
 	this->SetSizer(mTopSizer);
 	this->SetAutoLayout(true);
 	
-	wxButton *lOk = new wxButton(this,wxID_OK,_T("OK"),wxPoint(300,350),wxDefaultSize,0);
+	wxButton *lOk = new wxButton(this,wxID_OKBUTTON,_T("OK"),wxPoint(300,350),wxDefaultSize,0);
 }
 
 
@@ -170,4 +171,13 @@ void DialogInput::LongitudinalOverLapCalculate()
 void DialogInput::GetLongitudinalOverlap(wxCommandEvent& WXUNUSED(event))
 {
 	LongitudinalOverLapCalculate();
+}
+
+void DialogInput:: onOk(wxCommandEvent& WXUNUSED(event))
+{
+	this->Destroy();
+}
+void DialogInput::onQuit(wxCloseEvent& WXUNUSED(event))
+{
+	this->Destroy();
 }

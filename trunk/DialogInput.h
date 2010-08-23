@@ -17,15 +17,14 @@ public:
 
 	void GetLateralLongitudinalOverlap(wxCommandEvent& event);
 	void LateralLongitudinalOverLapCalculate();
-
 	void GetLateralOverlap(wxCommandEvent& event);
-	
 	void LateralOverLapCalculate();
-
 	void GetLongitudinalOverlap(wxCommandEvent& event);
 	void LongitudinalOverLapCalculate();
+	void onOk(wxCommandEvent& event);
+	void onQuit(wxCloseEvent& event);
 
-	enum { wxID_RADIO,wxID_LATERAL_BUCKET ,wxID_LONGITUDINAL_BUCKET };
+	enum { wxID_RADIO,wxID_LATERAL_BUCKET ,wxID_LONGITUDINAL_BUCKET,wxID_OKBUTTON = wxID_EXIT };
 
 	wxChoice *mLateralChoice,*mLongitudinalChoice;
 	wxRadioBox* mCenterSideRadio;

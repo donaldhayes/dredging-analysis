@@ -38,8 +38,16 @@ void MyFrame::AddMediaPlayer()
 {
 	mMediaPlayer = new wxMediaCtrl();
 	wxFlexGridSizer* sizer = new wxFlexGridSizer(2, 1, 0, 0);
-	
-	mMediaPlayer->Create(mMediaPlayerPanel,wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0,wxMEDIABACKEND_WMP10);
+	wxString lbackend ;
+#ifdef __WXMSW__
+	lbackend = wxMEDIABACKEND_WMP10;
+#endif
+#ifdef __WXMAC__
+	lbackend = wxMEDIABACKEND_QUICKTIME;
+#endif
+
+	mMediaPlayer->Create(mMediaPlayerPanel,wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0,lbackend);
+
 	mMediaPlayerPanel->SetSizer(sizer);
     mMediaPlayerPanel->SetAutoLayout(true);
     sizer->AddGrowableRow(0);

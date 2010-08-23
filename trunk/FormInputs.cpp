@@ -262,4 +262,5 @@ void FormInputs::OptimizeBucket()
 	mOptimizeDialog->mBucketWidth = &mBucketWidth;
 	mOptimizeDialog->ShowModal();
 
+
 }
