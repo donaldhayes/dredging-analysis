@@ -1,12 +1,15 @@
 #include "FormInputs.h"
 #include <cmath>
 #include <iostream>
-#include <wx/debug.h>
+
+
 BEGIN_EVENT_TABLE( FormInputs, MyFrame )
 	EVT_BUTTON( 0, OnSubmit ) 
 	EVT_BUTTON( 1, OnRefresh ) 
 	EVT_CHOICE(wxID_MEDIACHOICE,PlaySelectedFile)
-	
+	EVT_MEDIA_LOADED(wxID_ANY,OnMediaLoad)
+	EVT_BUTTON(wxID_OPTIMIZE,OptimizeBucketPlacement)
+		
 END_EVENT_TABLE()
 
 
@@ -20,9 +23,6 @@ FormInputs	::	FormInputs()
 				MyFrame(_T( "Dredging Analysis") )
 
 {
-//	this->Connect(wxID_MEDIA,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::GetFileToPlay));
-	this->Connect(wxID_ANY, wxEVT_MEDIA_LOADED,wxMediaEventHandler(FormInputs::OnMediaLoad),(wxObject*)0);
-	this->Connect(wxID_OPTIMIZE,wxEVT_COMMAND_BUTTON_CLICKED,wxCommandEventHandler(FormInputs::OptimizeBucketPlacement));
   
 		
 }
@@ -71,6 +71,7 @@ void FormInputs::PlaySelectedFile(wxCommandEvent& WXUNUSED(event))
 		{
 			mMediaPlayer->Load("C:\\Users\\bharath\\Downloads\\Inception.2010.TS.XVID-PrisM\\PrisM-Inception.2010\\Inception.avi");
 		}
+		
 }
 
 
@@ -246,6 +247,7 @@ FormInputs :: Calculate_BucketRows()
 }
 void FormInputs::OptimizeBucketPlacement(wxCommandEvent& WXUNUSED(event))
 {
+	
 	GetDredgeAreaData() ;
 	GetMachineData() ;
 	GetBucketData() ;
@@ -264,3 +266,6 @@ void FormInputs::OptimizeBucket()
 
 
 }
+
+
+

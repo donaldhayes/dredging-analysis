@@ -9,12 +9,14 @@
 #include <wx/log.h>
 #include <wx/sizer.h>
 #include <wx/dialog.h>
+ 
+
 
 class MyFrame : public wxFrame
 {
 	public:
-		
 		MyFrame(const wxString& title) ;
+		
 		void AddPageIndexes() ;
 		void AddButtons() ;
 		
@@ -25,6 +27,9 @@ class MyFrame : public wxFrame
 		void AddMediaPlayer();
 		enum { wxID_MEDIA = 2,wxID_OPTIMIZE,wxID_MEDIACHOICE };
 		
+		
+
+		
 protected:	
 
 		wxPanel *mButtonPanel, *mNotebookPanel ;
@@ -34,7 +39,7 @@ protected:
 		wxNotebook *mNotebook, *mFirstChildNotebook;
 		wxButton *mSubmitButton, *mRefreshButton, *mMediaPlayerButton,*mOptimizeButton;
 		wxChoice *mMediaSelect;
-		wxString *mPlayList;
+		wxString mPlayList[3];	
 
 		wxStaticBox *mMachineData, *mBucketData, *mDredgeAreaData ;
 		wxStaticText *mMediaText;
@@ -47,9 +52,13 @@ protected:
 		wxTextCtrl *mBucket_Width, *mBucket_Length, *mBucket_PenetrationDepth ;
 		wxTextCtrl *mDredgeArea_Width, *mDredgeArea_Length, *mDredgeArea_LateralOverlap, *mDredgeArea_LongitudinalOverlap ;
 
+		wxFlexGridSizer *sizer;
+
 		wxMediaCtrl *mMediaPlayer;
 		
+		
 		int xxxx ;
+		
 		
 };
 

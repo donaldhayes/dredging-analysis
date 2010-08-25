@@ -12,6 +12,7 @@ public:
 	FormInputs *mFormInput;
 
 	DialogInput(int,int );
+	void OnClose(wxCloseEvent &event);
 	void AddOptimizeDialog(int,int);
 	float Cal_SwingCharacteristics();
 

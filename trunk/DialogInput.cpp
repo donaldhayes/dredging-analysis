@@ -79,6 +79,8 @@ void DialogInput ::AddOptimizeDialog(int lLateralBucketNumber,int lLongBucketNum
 	this->SetAutoLayout(true);
 	
 	wxButton *lOk = new wxButton(this,wxID_OKBUTTON,_T("OK"),wxPoint(300,350),wxDefaultSize,0);
+	delete [] mNumber_Buckets;
+	delete [] mNumber_BucketsLong;
 }
 
 

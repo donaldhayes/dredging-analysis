@@ -6,7 +6,6 @@
 #include "DialogInput.h"
 
 
-
 class FormInputs : public MyFrame
 {
 	public:
@@ -14,7 +13,7 @@ class FormInputs : public MyFrame
 		void GetDredgeAreaData() ;
 		void GetMachineData() ;
 		void GetBucketData() ;
-
+		
 		void GetFileToPlay(wxCommandEvent& event);
 		void OnGetPath(const wxString& path);
 		void OnMediaLoad(wxMediaEvent& event);
@@ -36,12 +35,13 @@ class FormInputs : public MyFrame
 		void Calculate_BucketRows() ;
 		friend class DialogInput;	
 
-		DialogInput *mOptimizeDialog;	
+		DialogInput *mOptimizeDialog;
 
 		float mBoomLength, mMaxDredgeWidth, mMinDredgeReach, mMaxDredgeReach ;
 		float mDredgeAreaWidth, mDredgeAreaLength, mDredgeAreaLateralOverlap, mDredgeAreaLongitudinalOverlap ;
 		float mBucketWidth, mBucketLength, mPenetrationDepth ;
 		float mSwingArcLength ;
+		
 		
 		DECLARE_EVENT_TABLE()
 };
