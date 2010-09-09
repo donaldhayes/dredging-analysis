@@ -7,11 +7,15 @@
 	#include <wx/button.h>
 	#include <wx/wx.h>
 
+	class DrawImages ;
 	class BottomPanel : public wxPanel
 	{
 		public:
 
 			BottomPanel( wxFrame* aParent ) ;
+			void whichImagesToLoad( wxCommandEvent& eve ) ;
+			void getResults( wxCommandEvent& eve ) ;
+			void setDrawImagesFriendReference( DrawImages	*aReference ) ;
 
 		private:
 
@@ -19,6 +23,8 @@
 			wxStaticText	*mBucketTypeStaticText ;
 			wxComboBox		*mBucketSelectionComboBox ;
 			wxArrayString	mBucketTypes ;
+
+			DrawImages		*mFriendReference ;
 
 		DECLARE_EVENT_TABLE()
 	} ;

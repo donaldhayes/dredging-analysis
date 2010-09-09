@@ -1,4 +1,5 @@
 #include "BottomPanel.h"
+#include "DrawImages.h"
 
 enum
 {
@@ -22,6 +23,47 @@ BottomPanel	::	BottomPanel(wxFrame *aParent)
 }
 
 
+void
+BottomPanel	::	whichImagesToLoad( wxCommandEvent &eve )
+{
+	int lSelect( mBucketSelectionComboBox -> GetSelection() ) ;
+
+	if ( lSelect == 0 )
+	{
+		mFriendReference->mImage.LoadFile(_T("image.jpeg"), wxBITMAP_TYPE_JPEG ) ;
+	}
+
+	else if( lSelect == 1 )
+	{
+		mFriendReference->mImage.LoadFile(_T("image_1.jpg"), wxBITMAP_TYPE_JPEG ) ;
+	}
+	
+	if( mFriendReference -> mSports -> GetSelection() != 0 )
+	{
+		mFriendReference -> mSports -> ChangeSelection( 0 ) ;
+	}
+
+	mFriendReference -> drawHelper() ;
+}
+
+void
+BottomPanel	::	setDrawImagesFriendReference( DrawImages *aReference )
+{
+	mFriendReference = aReference ;
+}
+
+void
+BottomPanel	::	getResults( wxCommandEvent &eve )
+{
+	
+	mFriendReference -> mSports -> ChangeSelection( 1 ) ;
+	mFriendReference -> mOutdoor_Sports -> ChangeSelection( 0 ) ;/*-> ChangeSelection( 1 )*/ ;
+
+}
+
 BEGIN_EVENT_TABLE( BottomPanel, wxPanel )
+
+	EVT_COMBOBOX( BUCKET_SELECTION_COMBO_BOX, whichImagesToLoad )
+	EVT_BUTTON	( GET_RESULTS, getResults )
 
 END_EVENT_TABLE()

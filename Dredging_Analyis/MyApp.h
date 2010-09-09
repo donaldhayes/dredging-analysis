@@ -12,11 +12,14 @@
 			
 			MyApp() ;
 			bool OnInit() ;
+			void escapeKeyBoardEvent( wxKeyEvent& eve ) ;
 
 		private:
 			wxFrame		*mFrameObject ;
 			DrawImages	*mDrawImagesObject ;
 			BottomPanel	*mBottomPanelReference ;
+
+			DECLARE_EVENT_TABLE() 
 	} ;
 
 	IMPLEMENT_APP( MyApp ) 
