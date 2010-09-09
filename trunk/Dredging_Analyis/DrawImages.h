@@ -11,7 +11,7 @@
 
 	enum
 	{
-		OUTER_NOTEBOOK = 11, 
+		OUTER_NOTEBOOK = 100, 
 		INNER_NOTEBOOK, 
 		FRAME_PANEL, 
 		NB_SPORTS_PANEL,
@@ -25,7 +25,7 @@
 		TEXT_CTRL_1
 	};
 	
-	//class BottomPanel ;
+	class BottomPanel ;
 
 	class DrawImages : public wxPanel
 	{
@@ -74,9 +74,9 @@
 
 			wxStaticText	*mStaticText ;
 
-		//friend class BottomPanel ;
+		friend class BottomPanel ;
 
-			DECLARE_EVENT_TABLE()
+		DECLARE_EVENT_TABLE()
 	} ;
 
 #endif
