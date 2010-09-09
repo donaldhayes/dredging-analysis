@@ -61,9 +61,9 @@ void
 DrawImages	:: addSportsNotebook()
 {
 	
-	mSports->AddPage( mIndoor_Sports_Panel,  _T(" Indoor "), true ) ;
-	mSports->AddPage( mOutdoor_Sports_Panel, _T("Outdoor "), false ) ;
-	mSports->AddPage( mMedia_Panel, _T("Video"), false ) ;
+	mSports->AddPage( mIndoor_Sports_Panel,  _T("Input"), true ) ;	/*Indoor*/
+	mSports->AddPage( mOutdoor_Sports_Panel, _T("Results"), false ) ;		/*Outdoor*/
+	mSports->AddPage( mMedia_Panel, _T("Media"), false ) ;				/*Video*/
 
 }
 
@@ -71,8 +71,8 @@ void
 DrawImages	:: addIndoorSportsNotebook()
 {
 	
-	mIndoor_Sports->AddPage( mChess_Panel, _T("Chess"),true ) ;
-	mIndoor_Sports->AddPage( mTable_Tennis_Panel, _T("Table Tennis"), false ) ;
+	mIndoor_Sports->AddPage( mChess_Panel, _T("Image_1"),true ) ;			/*Chess, Table Tennis*/
+	mIndoor_Sports->AddPage( mTable_Tennis_Panel, _T("Image_2"), false ) ;
 
 }
 
@@ -80,9 +80,18 @@ void
 DrawImages	:: addOutdoorSportsNotebook()
 {
 		
-	mOutdoor_Sports->AddPage( mCricket_Panel	, _T("Cricket"), false ) ;
-	mOutdoor_Sports->AddPage( mBasket_Ball_Panel, _T("Basket Ball"), true ) ;
+	mOutdoor_Sports->AddPage( mCricket_Panel	, _T("Calculations"), false ) ;		/*Cricket, Basket Ball*/
+	mOutdoor_Sports->AddPage( mBasket_Ball_Panel, _T("Graphs"), true ) ;
 
+}
+
+void
+DrawImages	:: drawHelper()
+{
+	wxClientDC lClientDC( mChess_Panel );
+	lClientDC.Clear() ;
+	mChess_Panel->SetBackgroundColour( wxColour(_T("wxWHITE")) );
+	lClientDC.DrawBitmap( mImage, 0, 0, false ) ;
 }
 
 void 
@@ -94,6 +103,8 @@ DrawImages	::	paintEvent( wxPaintEvent & evt )
 
 	wxPaintDC lPaintDC( this );
 	wxClientDC lClientDC( mChess_Panel );
+	lClientDC.Clear() ;
+	mChess_Panel->SetBackgroundColour( wxColour(_T("wxWHITE")) );
 	lClientDC.DrawBitmap( mImage, 0, 0, false ) ;
 
 }
@@ -178,6 +189,7 @@ DrawImages	::	resetGlobalValue( wxCommandEvent& eve )
 	gValue = 0 ;
 }
 
+
 BEGIN_EVENT_TABLE( DrawImages, wxPanel )
 
 	EVT_PAINT( DrawImages :: paintEvent )
@@ -186,5 +198,5 @@ BEGIN_EVENT_TABLE( DrawImages, wxPanel )
 	EVT_COMBOBOX( wxID_ANY, playVideoFile )
 	EVT_TEXT( TEXT_CTRL_1, enteredWXString )
 	EVT_TEXT_ENTER( wxID_ANY, resetGlobalValue )
-
+	
 END_EVENT_TABLE()

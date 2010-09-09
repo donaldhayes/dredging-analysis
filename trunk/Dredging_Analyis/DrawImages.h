@@ -48,6 +48,7 @@
 			void enteredWXString( wxCommandEvent& eve ) ;
 
 			void resetGlobalValue( wxCommandEvent& eve ) ;
+			void drawHelper() ;
 
 			~DrawImages() ;
 
