@@ -1,14 +1,4 @@
-<link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css"></link>
-<script language="javascript" src="js/shCore.js"></script>
-<script language="javascript" src="js/shBrushCSharp.js"></script>
-<script language="javascript" src="js/shBrushXml.js"></script>
-<script language="javascript">
-dp.SyntaxHighlighter.ClipboardSwf = '/flash/clipboard.swf';
-dp.SyntaxHighlighter.HighlightAll('code');
-</script>
-
-
-<pre name="code" class="c++">
+&ltpre name="code" class="c++">
 
 #ifndef BOTTOM_PANEL_H
 #define BOTTOM_PANEL_H
@@ -44,4 +34,19 @@ dp.SyntaxHighlighter.HighlightAll('code');
 
 #endif
 
-</pre>
+&lt/pre>
+
+
+
+<link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css"></link>
+<script language="javascript" src="js/shCore.js"></script>
+<script language="javascript" src="js/shBrushCSharp.js"></script>
+<script language="javascript" src="js/shBrushXml.js"></script>
+<script language="javascript">
+<script language="javascript">
+window.onload = function () {
+    dp.SyntaxHighlighter.ClipboardSwf = '/flash/clipboard.swf';
+    dp.SyntaxHighlighter.HighlightAll('code');
+}
+</script>
+</script>
