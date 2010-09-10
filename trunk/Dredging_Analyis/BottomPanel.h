@@ -1,3 +1,5 @@
+<pre name="code" class="c++">
+
 #ifndef BOTTOM_PANEL_H
 #define BOTTOM_PANEL_H
 	
@@ -31,3 +33,5 @@
 
 
 #endif
+
+</pre>
