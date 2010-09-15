@@ -6,7 +6,7 @@
 	#include <wx/mediactrl.h>
 	#include <wx/combobox.h>
 	#include <wx/textctrl.h>
-#include <wx/msgdlg.h>
+	#include <wx/msgdlg.h>
 	
 	#include <string>
 	#include <vector>
