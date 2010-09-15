@@ -9,6 +9,19 @@ MyApp	::	MyApp()
 
 {
 	wxInitAllImageHandlers() ;
+	loadImageListToVector() ;
+}
+
+
+void
+MyApp	::	loadImageListToVector()
+{
+	
+	///	Programmer must push back the names of all images names to mImageVector to be loaded on to notebook pages.
+
+	mImageVector.push_back( _T("FrontView.jpg") ) ;
+	mImageVector.push_back( _T("Right.jpg") ) ;
+
 }
 
 bool
@@ -19,7 +32,7 @@ MyApp	:: OnInit()
 	
 	mFrameObject			= new wxFrame( NULL, wxID_ANY, _T("Extra Curicular Activities"), wxPoint(50,50), wxSize(500,700), ( wxMINIMIZE_BOX | wxSYSTEM_MENU | wxCAPTION | wxCLOSE_BOX ), _T("Frame") ) ;
 
-	mDrawImagesObject		= new DrawImages( mFrameObject, _T("image.jpeg"), wxBITMAP_TYPE_JPEG );
+	mDrawImagesObject		= new DrawImages( mFrameObject, mImageVector, wxBITMAP_TYPE_JPEG );
 	mBottomPanelReference	= new BottomPanel( mFrameObject ) ;
 
 	mBottomPanelReference -> setDrawImagesFriendReference( mDrawImagesObject ) ;

@@ -6,8 +6,10 @@
 	#include <wx/mediactrl.h>
 	#include <wx/combobox.h>
 	#include <wx/textctrl.h>
+#include <wx/msgdlg.h>
 	
 	#include <string>
+	#include <vector>
 
 	enum
 	{
@@ -22,7 +24,9 @@
 		INDOOR_SPORTS,
 		OUTDOOR_SPORTS,
 		SPORTS,
-		TEXT_CTRL_1
+		TEXT_CTRL_1,
+		TEXT_CTRL_2,
+		TEXT_CTRL_3
 	};
 	
 	class BottomPanel ;
@@ -31,7 +35,7 @@
 	{
 		public:
 
-			DrawImages( wxFrame* aParent, wxString afile, wxBitmapType aformat) ;
+			DrawImages( wxFrame* aParent, std::vector< wxString > aImageVector, wxBitmapType aformat) ;
 			void paintEvent( wxPaintEvent & evt );
 			void paintNow();
 			void render( wxDC& dc );
@@ -44,10 +48,11 @@
 			void helpFunction( wxNotebookEvent& eve ) ;
 
 			void playVideoFile( wxCommandEvent& eve ) ;
-			bool isAlphaNumeric( std::string aReceivedString ) ;
+			bool isNumeric( std::string aReceivedString ) ;
 			void enteredWXString( wxCommandEvent& eve ) ;
 
 			void resetGlobalValue( wxCommandEvent& eve ) ;
+			void makeCalculations() ;
 			void drawHelper() ;
 
 			~DrawImages() ;
@@ -71,9 +76,13 @@
 
 			wxComboBox		*mVedioSelection ;
 
-			wxTextCtrl		*mTextBox1 ;
+			wxTextCtrl		*mTextBox1, *mTextBox2, *mTextBox3 ;
 
 			wxStaticText	*mStaticText ;
+
+			std::vector< wxString > mImageVector ;
+
+			int mWhichImageFileToLoad ;
 
 		friend class BottomPanel ;
 
