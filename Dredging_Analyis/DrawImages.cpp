@@ -137,6 +137,10 @@ DrawImages	::	paintEvent( wxPaintEvent & evt )
 		mChess_Panel->SetBackgroundColour( wxColour(_T("wxWHITE")) );
 		lClientDC.DrawBitmap( mImage, 0, 0, false ) ;
 	}
+
+
+	if( ( mSports -> GetSelection() == 1 ) && ( mOutdoor_Sports -> GetSelection() == 1 ) )
+		drawLayout() ;
 }
 
 void
@@ -166,6 +170,9 @@ void
 DrawImages	::	helpFunction( wxNotebookEvent &eve )
 {
 	indoorImages( eve ) ;
+
+	if( ( mSports -> GetSelection() == 1 ) && ( mOutdoor_Sports -> GetSelection() == 1 ) )
+		drawLayout() ;
 }
 
 void
@@ -264,8 +271,7 @@ void
 DrawImages	::	makeCalculations()
 {
 	std::vector<float> lValues ;
-	int lNumberOfBuckets, lNumOfLateralBuckets, lNumOfLongitudinalBuckets ;
-
+	
 	lValues.push_back( wxAtof(mTextBox1->GetValue()) );
 	lValues.push_back( wxAtof(mTextBox2->GetValue()) );
 	lValues.push_back( wxAtof(mTextBox3->GetValue()) );
@@ -277,24 +283,66 @@ DrawImages	::	makeCalculations()
 	  )
 	{
 		
-		lNumberOfBuckets			= ceil( 1000/( lValues[0]* lValues[1]* lValues[2] ) );
-		lNumOfLateralBuckets		= ceil( 10 / lValues[0] ) ;
-		lNumOfLongitudinalBuckets	= ceil( 10 / lValues[1] ) ;
+		mNumberOfBuckets			= ceil( 1000/( lValues[0]* lValues[1]* lValues[2] ) );
+		mNumOfLateralBuckets		= ceil( 10 / lValues[0] ) ;
+		mNumOfLongitudinalBuckets	= ceil( 10 / lValues[1] ) ;
 
-		wxString str( wxString::Format(wxT("%i"),lNumberOfBuckets) ) ;
+		wxString str( wxString::Format(wxT("%i"),mNumberOfBuckets) ) ;
 		str.Append(_T(",") ) ;
-		str.Append( wxString::Format(wxT("%i"),lNumOfLateralBuckets) ) ;
+		str.Append( wxString::Format(wxT("%i"),mNumOfLateralBuckets) ) ;
 		str.Append(_T(",") ) ;
-		str.Append( wxString::Format(wxT("%i"),lNumOfLongitudinalBuckets) ) ;
+		str.Append( wxString::Format(wxT("%i"),mNumOfLongitudinalBuckets) ) ;
 
 
 		mStaticText -> SetLabel( str );
 
 	}
 
-	else
+	drawLayout() ;
+}
+
+void
+DrawImages	::	drawLayout()
+{
+	
+	int lX_Add , lY_Add ;
+	int lx1,ly1, lx2, ly2 ;
+	static bool lChangeColor( true ) ;
+
+	wxSize lSize( mCricket_Panel -> GetSize() ) ;
+	lX_Add = lSize.GetHeight() ;
+	lY_Add = lSize.GetWidth() ;
+
+	lX_Add /= mNumOfLateralBuckets ;
+	lY_Add /= mNumOfLongitudinalBuckets ;
+
+	wxClientDC lDC( mBasket_Ball_Panel ) ;
+
+	for( int i=0 ; i < mNumOfLateralBuckets ; i++ )
 	{
+		lx1 = lX_Add * i ;
+		for( int j=0 ; j < mNumOfLongitudinalBuckets ; j++ )
+		{
+			ly1 = lY_Add * j ;
+			lx2 = lX_Add * ( i+1 ) ;
+			ly2 = lY_Add * ( j+1 ) ;
+
+			if( lChangeColor )
+			{
+				lDC.SetBrush( *wxBLUE_BRUSH ) ;
+				lChangeColor = false ;
+			}
+			else
+			{
+				lDC.SetBrush( *wxRED_BRUSH ) ;
+				lChangeColor = true ;
+			}
+
+			lDC.DrawRectangle( lx1, ly1, lx2, ly2 ) ;
+
+		}
 	}
+
 }
 
 void
