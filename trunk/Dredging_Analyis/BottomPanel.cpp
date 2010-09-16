@@ -48,10 +48,11 @@ void
 BottomPanel	::	getResults( wxCommandEvent &eve )
 {
 	
+	
+	mFriendReference -> mSports -> ChangeSelection( 1 ) ;
+	mFriendReference -> mOutdoor_Sports -> ChangeSelection( 1 ) ;/*-> ChangeSelection( 1 )*/ ;
 	mFriendReference -> makeCalculations() ;
-	mFriendReference -> mSports -> ChangeSelection( 0 ) ;
-	mFriendReference -> mIndoor_Sports -> ChangeSelection( 0 ) ;/*-> ChangeSelection( 1 )*/ ;
-	mFriendReference -> drawHelper() ;
+	//mFriendReference -> drawHelper() ;
 
 }
 

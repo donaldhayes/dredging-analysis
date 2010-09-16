@@ -54,6 +54,7 @@
 			void resetGlobalValue( wxCommandEvent& eve ) ;
 			void makeCalculations() ;
 			void drawHelper() ;
+			void drawLayout() ;
 
 			~DrawImages() ;
 
@@ -83,6 +84,8 @@
 			std::vector< wxString > mImageVector ;
 
 			int mWhichImageFileToLoad ;
+			int mNumberOfBuckets, mNumOfLateralBuckets, mNumOfLongitudinalBuckets ;
+
 
 		friend class BottomPanel ;
 
